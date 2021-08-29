@@ -19,21 +19,29 @@ module.exports.users = [
     }
 ]
 
-module.exports.posts = [
+module.exports.schedules = [
     {
         'user_id': 0,
-        'post': "Here is my first post"
+        'day': 1,
+        'start_at': "2PM",
+        'end_at': "4PM"
     },
     {
         'user_id': 0,
-        'post': "lockdown sucks"
+        'day': 2,
+        'start_at': "2PM",
+        'end_at': "4PM"
     },
     {
         'user_id': 0,
-        'post': "I went to little rogue"
+        'day': 3,
+        'start_at': "2PM",
+        'end_at': "4PM"
     },
     {
         'user_id': 2,
-        'post': "to bought matcha"
+        'day': 5,
+        'start_at': "8AM",
+        'end_at': "6PM"
     }
 ]

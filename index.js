@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
-const data = require('./data') // const {users, posts} = require('./data')
-require('bcryptjs')
+const data = require('./data 2') // const {users, posts} = require('./data')
+const bcrypt = require('bcryptjs')
 const PORT = process.env.PORT || 3000
 
 // Body Parser
@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: false}))
 app.set('view engine', 'ejs')
 
 // Set our static folder
-app.use(express.static(''))
+app.use(express.static('public'))
 
 // Homepage
 app.get('/', (req, res) => {
@@ -45,8 +45,6 @@ app.post('/users', (req, res) => {
 // Display a single post
 app.get('/posts/:id', (req,res) => {
     const found = data.posts.some(post => post.id === Number(req.params.id))
-    
-
     if (found) {
         const post = data.posts.filter(post => post.id === Number(req.params.id))
         res.send(post[0])
@@ -55,8 +53,17 @@ app.get('/posts/:id', (req,res) => {
     }
 })
 
-app.get('/posts/:id', (req,res) => { // the "id" in posts/:id must be the same as req.params.id
-    res.send(req.params.id) // send request parameters in id 
+app.get('/users/:id/schedules', (req,res) => { // the "id" in posts/:id must be the same as req.params.id
+    let usersSchedules = []
+    // 1. is there a 'user_id' in data.posts that is the same as req.params.id?
+    // 2. if so, push that object into userPosts
+
+    for (let i=0; i < data.schedules.length; i++) {
+        if (data.schedules[i].user_id === Number(req.params.id)) {
+            usersSchedules.push(data.schedules[i])
+        }
+    }
+    res.send(usersSchedules) // send request parameters in id 
 })
 
 // POST rquest
