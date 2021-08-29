@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: false}))
 app.set('view engine', 'ejs')
 
 // Set our static folder
-app.use(express.static(''))
+app.use(express.static('public'))
 
 // Homepage
 app.get('/', (req, res) => {
@@ -22,9 +22,12 @@ app.get('/', (req, res) => {
 })
 
 // Displays all users
-app.get('/', (req, res) => {
-    res.json(data.users)
-})
+app.get('/users', (req, res) => {
+    res.render('pages/users', {
+        users: data.users,
+    })
+    // res.json(data.users)
+}) 
 
 // Adds a new user
 app.post('/users', (req, res) => {
@@ -63,3 +66,8 @@ app.get('/posts/:id', (req,res) => { // the "id" in posts/:id must be the same a
 app.listen(PORT, () => {
     console.log(`You're doing amazing! App is listening at http://localhost:${PORT}`)
 })
+
+// EJS Tags
+// <% 
+// <%= outputs the value into the template
+// <%- outputs the unescape

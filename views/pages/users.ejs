@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- Insert header here -->
+    <%- include('../partials/header') %>
+    
+    <main>
+        <h1> All users </h1>
+        <!-- Display all of my users-->
+        <% for (let i =0; i < users.length; i++) { %>
+        <p> 
+            <strong> <%=users[i].firstname%> <%=users[i].lastname%> </strong> <br>
+            <%= users[i].email %> <br>
+            <%= users[i].password %>
+        </p>
+        <% } %>
+    </main>
+
+    <!-- Insert body here -->
+</body>
+</html>
