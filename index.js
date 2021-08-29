@@ -53,20 +53,33 @@ app.get('/posts/:id', (req,res) => {
     }
 })
 
-app.get('/users/:id/schedules', (req,res) => { // the "id" in posts/:id must be the same as req.params.id
-    let usersSchedules = []
-    // 1. is there a 'user_id' in data.posts that is the same as req.params.id?
-    // 2. if so, push that object into userPosts
+// Way 1: loops to show all schedules of one particular user ID
+// app.get('/users/:id/schedules', (req, res) => {
+    // grab all the posts of a particular user
+    // make an empty array to store all the schedules that match
+    // let usersSchedules = []
+    // loop through all posts
+    // for (let i=0; i < data.schedules.length; i++) {
+        // if users_id of schedule is the same as ID in the path, add to usersSchedule
+        // if (data.schedules[i].user_id === Number(req.params.id)) {
+          //  usersSchedules.push(data.schedules[i])
+        // }
+   // }
+  //  res.json(usersSchedules)
+// })
 
-    for (let i=0; i < data.schedules.length; i++) {
-        if (data.schedules[i].user_id === Number(req.params.id)) {
-            usersSchedules.push(data.schedules[i])
-        }
-    }
-    res.send(usersSchedules) // send request parameters in id 
+// Way 2: filter to show all schedules of one particular user ID
+app.get('/users/:id/schedules', (req, res) => {
+const usersSchedules = data.schedules.filter(schedules => schedules.user_id === Number(req.params.id))
+res.json(usersSchedules)
 })
 
 // POST rquest
 app.listen(PORT, () => {
     console.log(`You're doing amazing! App is listening at http://localhost:${PORT}`)
 })
+
+// Difference between send and json
+// most of the time, they are fairly identical
+// res.json has the added advantage where if the thing you're sending isn't originally json object, it will pass it for you 
+// most of the time, you will see res.json more than res.send in APIs
