@@ -8,19 +8,21 @@
 </head>
 <body>
 
-    <!-- Insert header here -->
     <%- include('../partials/header') %>
     
     <main>
-        <h1> All users </h1>
+        
+        <h1 style="color:cornflowerblue;"> All users </h1>
         <!-- Display all of my users-->
-        <% for (let i =0; i < users.length; i++) { %>
-        <p> 
-            <strong> <%=users[i].firstname%> <%=users[i].lastname%> </strong> <br>
+        <% for (let i =0; i < users.length; i++) { %> 
+        <p>
+           <strong> <%=users[i].firstname%> <%=users[i].lastname%> </strong> <br>
             <%= users[i].email %> <br>
-            <%= users[i].password %>
+            <%= users[i].password %> 
         </p>
         <% } %>
+ 
+
     </main>
 
     <!-- Insert body here -->

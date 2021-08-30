@@ -8,21 +8,23 @@ const PORT = process.env.PORT || 3000
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
-// Set view engine as EJS
+// Set my template engine as EJS
 app.set('view engine', 'ejs')
+// app.set('views', './example') // set the views folder to a different name
 
-// Set our static folder
+// Set public folder as our static folder
 app.use(express.static('public'))
 
 // Homepage
 app.get('/', (req, res) => {
-    res.render('index', {
-        name: "Vei"
+    res.render('pages/index', {
+        users: data.users
     })
 })
 
 // Displays all users
 app.get('/users', (req, res) => {
+    console.log(data.users)
     res.render('pages/users', {
         users: data.users,
     })
