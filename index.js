@@ -3,6 +3,7 @@ const app = express()
 const data = require('./data') // const {users, posts} = require('./data')
 require('bcryptjs')
 const PORT = process.env.PORT || 3000
+const db = require('./database')
 
 // Body Parser
 app.use(express.json())
