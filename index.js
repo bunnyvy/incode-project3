@@ -28,12 +28,34 @@ app.get('/', (req, res) => {
 
 // Getting posts and new posts
 app.get('/posts', (req, res) => {
-    res.render('pages/posts')
+    db.any('SELECT * FROM users;')
+    .then(posts => {
+        console.log(posts)
+        res.render('pages/posts', {
+        posts
+        })
+    })
+    .catch(error => {
+        console.log(error)
+        res.send(error)
+    })
   })
   
   app.get('/posts/new', (req, res) => {
     res.render('pages/new-post')
   })
+
+  app.post('/posts/new', (req, res) => {
+      console.log(req.body)
+      db.none('INSERT INTO users(name, post) VALUES($1, $2);', [req.body.name, req.body.post])
+      .then(()=> {
+          res.redirect('/posts')
+      })
+      .catch(error => {
+          console.log(error)
+          res.send(error)
+      })
+    })
 
 // Displays all users
 app.get('/users', (req, res) => {
@@ -63,7 +85,6 @@ app.post('/users', (req, res) => {
 // Display a single post
 app.get('/posts/:id', (req,res) => {
     const found = data.posts.some(post => post.id === Number(req.params.id))
-    
 
     if (found) {
         const post = data.posts.filter(post => post.id === Number(req.params.id))

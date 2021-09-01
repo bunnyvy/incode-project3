@@ -1,9 +1,19 @@
+// Proper way to initialise and share the Database object
+
+// Loading and initialising the library:
 const pgp = require(`pg-promise`)()
 
-const database = 'test_posts'
+// Preparing the connection details:
+const connection = {
+    user: "postgres",
+    password: "12345678",
+    host: "localhost",
+    port: 5432,
+    database: "mrcoffee"
+}
 
-const connection = 'postgres://veiyie:12345678@localhost:5432/' + database
-
+// Creating a new database instance from the connection details
 const db = pgp(connection)
 
+// Exporting the database oject for shared use:
 module.exports =  db

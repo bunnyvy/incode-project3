@@ -9,6 +9,14 @@
 <body>
 
   <h1>All Posts</h1>
+  <%= for (let i=0; i < posts.length; i++) { %>
+    <div>
+        <p>
+            <strong><%=posts[i].name%></strong>
+            <%=posts[i].post %>
+        </p>
+    </div>
+  <% } %>
   <!-- Insert my posts -->
   
 </body>
