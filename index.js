@@ -42,7 +42,7 @@ app.get('/posts', (req, res) => {
   })
   
   app.get('/posts/new', (req, res) => {
-    res.render('pages/new-post')
+    res.render('pages/newposts')
   })
 
   app.post('/posts/new', (req, res) => {
@@ -79,7 +79,8 @@ app.post('/users', (req, res) => {
     }
 
     data.users.push(newUser)
-    res.json(data.users)
+    //res.json(data.users)
+    res.redirect('/users')
 })
 
 // Display a single post

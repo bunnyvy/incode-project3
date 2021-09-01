@@ -13,8 +13,8 @@
   },
   "scripts": {
     "create_db": "psql -U postgres -f sql/create_db.sql",
-    "create_tables": "psql -U postgres -d test_posts -f sql/create_tables.sql",
-    "seed_tables": "psql -U postgres -d test_posts -f sql/seed_tables.sql",
+    "create_tables": "psql -U postgres -d mrcoffee -f sql/create_tables.sql",
+    "seed_tables": "psql -U postgres -d mrcoffee -f sql/seed_tables.sql",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
