@@ -3,7 +3,7 @@ const app = express()
 const data = require('./data') // const {users, posts} = require('./data')
 require('bcryptjs')
 const PORT = process.env.PORT || 3000
-app.listen(PORT, () => console.log(`App is listening on http://localhost:${PORT}`))
+app.listen(PORT, () => console.log(`App is listening on http://localhost:${PORT}`)) // post request
 const db = require('./database')
 
 // Body Parser
@@ -25,6 +25,15 @@ app.get('/', (req, res) => {
         users: data.users
     })
 })
+
+// Getting posts and new posts
+app.get('/posts', (req, res) => {
+    res.render('pages/posts')
+  })
+  
+  app.get('/posts/new', (req, res) => {
+    res.render('pages/new-post')
+  })
 
 // Displays all users
 app.get('/users', (req, res) => {
@@ -68,10 +77,7 @@ app.get('/posts/:id', (req,res) => { // the "id" in posts/:id must be the same a
     res.send(req.params.id) // send request parameters in id 
 })
 
-// POST rquest
-app.listen(PORT, () => {
-    console.log(`You're doing amazing! App is listening at http://localhost:${PORT}`)
-})
+
 
 // EJS Tags
 // <% 
