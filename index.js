@@ -3,11 +3,14 @@ const app = express()
 const data = require('./data') // const {users, posts} = require('./data')
 require('bcryptjs')
 const PORT = process.env.PORT || 3000
+app.listen(PORT, () => console.log(`App is listening on http://localhost:${PORT}`))
 const db = require('./database')
 
 // Body Parser
 app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: false})) 
+// ^^ when you received folder in, it will accept or reject the nested objects 
+//e.g. {"name":"vei", name:"vei"} --> only accepting the upper nest "parents", false is rejected those "grandchildren"
 
 // Set my template engine as EJS
 app.set('view engine', 'ejs')
@@ -18,7 +21,7 @@ app.use(express.static('public'))
 
 // Homepage
 app.get('/', (req, res) => {
-    res.render('pages/index', {
+    res.render('pages/index', { //go to pages folder and go to index file
         users: data.users
     })
 })
