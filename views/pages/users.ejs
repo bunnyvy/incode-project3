@@ -7,23 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-
     <%- include('../partials/header') %>
     
     <main>
         
-        
         <h1 style="color:cornflowerblue;"> All users </h1>
-        <!-- Display all of my users-->
-        <% for (let i =0; i < users.length; i++) { %> 
-        <p>
-           <strong> <%=users[i].firstname%> <%=users[i].lastname%> </strong> <br>
-            <%= users[i].email %> <br>
-            <%= users[i].password %> 
-        </p>
-        <% } %>
+        <!-- Display all users-->
+   
  
-
     </main>
 
     <!-- Insert body here -->

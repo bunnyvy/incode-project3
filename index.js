@@ -70,13 +70,13 @@ app.post('/users', (req, res) => {
 // Display a single user
 app.get('/users/:id', (req,res) => {
     
-    //const found = data.users.some(user => user.id === Number(req.params.id))
-    //if (found) {
-        //const users = data.users.filter(user => user.id === Number(req.params.id))
+    const found = data.users.some(user => user.id === Number(req.params.id))
+    if (found) {
+        const users = data.users.filter(user => user.id === Number(req.params.id))
         res.render('pages/singleuser')
-    //} else {
-    //    res.send('users not found')
-    //}
+    } else {
+        res.send('users not found')
+    }
 })
 
 // POST rquest
