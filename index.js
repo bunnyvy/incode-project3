@@ -6,9 +6,9 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, () => console.log(`App is listening on http://localhost:${PORT}`)) // post request
 const db = require('./database')
 
-// Body Parser
+// Body Parser Middleware
 app.use(express.json())
-app.use(express.urlencoded({extended: false})) 
+app.use(express.urlencoded({extended: false})) // handles form
 // ^^ when you received folder in, it will accept or reject the nested objects 
 //e.g. {"name":"vei", name:"vei"} --> only accepting the upper nest "parents", false is rejected those "grandchildren"
 
@@ -17,7 +17,7 @@ app.set('view engine', 'ejs')
 // app.set('views', './example') // set the views folder to a different name
 
 // Set public folder as our static folder
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 // Homepage
 app.get('/', (req, res) => {
@@ -41,11 +41,11 @@ app.get('/posts', (req, res) => {
     })
   })
   
-  app.get('/posts/new', (req, res) => {
+  app.get('/newposts', (req, res) => {
     res.render('pages/newposts')
   })
 
-  app.post('/posts/new', (req, res) => {
+  app.post('/newposts', (req, res) => {
       console.log(req.body)
       db.none('INSERT INTO users(name, post) VALUES($1, $2);', [req.body.name, req.body.post])
       .then(()=> {
@@ -65,6 +65,20 @@ app.get('/users', (req, res) => {
     })
     // res.json(data.users)
 }) 
+
+//Add new Schdule
+app.post('schedules',(req,res) => {
+    const {user_id,day,start_at,end_at} = req.body
+    const newSch = {
+        user_id,
+        day,
+        start_at,
+        end_at
+    }
+    data.schedules.push(newSch)
+    //res.json(data.schedules)
+    res.redirect('/schedules')
+})
 
 // Adds a new user
 app.post('/users', (req, res) => {
@@ -98,8 +112,6 @@ app.get('/posts/:id', (req,res) => {
 app.get('/posts/:id', (req,res) => { // the "id" in posts/:id must be the same as req.params.id
     res.send(req.params.id) // send request parameters in id 
 })
-
-
 
 // EJS Tags
 // <% 

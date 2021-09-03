@@ -1,6 +1,12 @@
-INSERT INTO users (name, post)
+INSERT INTO users (
+    firstname,
+    lastname,
+    email,
+    password
+    )
+
 VALUES
- ('Jamie Brown', 'Using this new post app, it''s not very fleshed out'),
- ('Bobby Brown', 'Books make me happy'),
- ('Vei Yie', 'I love drinking'),
- ('Mary', 'Little rogue matcha');
+ ('Jamie' 'Brown' 'jamiebrown@gmail.com' '1234905'),
+ ('Bobby Brown'),
+ ('Vei Yie'),
+ ('Mary');
