@@ -18,8 +18,28 @@ app.use(express.static('public'))
 // Homepage
 app.get('/', (req, res) => {
     res.render('pages/index', {
-        users: data.users
+        users: data.users //inside whatever file look at the variable users
     })
+})
+
+// NewUsers
+app.get('/', (req, res) => {
+    res.render('pages/newusers')
+})
+
+// Users
+app.get('/', (req, res) => {
+    res.render('pages/users')
+})
+
+// Schedule
+app.get('/', (req, res) => {
+    res.render('pages/schedule')
+})
+
+// NewSchedule
+app.get('/', (req, res) => {
+    res.render('pages/newschedule')
 })
 
 // Displays all users
@@ -47,21 +67,16 @@ app.post('/users', (req, res) => {
     res.json(data.users)
 })
 
-// Display a single post
-app.get('/posts/:id', (req,res) => {
-    const found = data.posts.some(post => post.id === Number(req.params.id))
+// Display a single user
+app.get('/users/:id', (req,res) => {
     
-
-    if (found) {
-        const post = data.posts.filter(post => post.id === Number(req.params.id))
-        res.send(post[0])
-    } else {
-        res.send('Post not found')
-    }
-})
-
-app.get('/posts/:id', (req,res) => { // the "id" in posts/:id must be the same as req.params.id
-    res.send(req.params.id) // send request parameters in id 
+    //const found = data.users.some(user => user.id === Number(req.params.id))
+    //if (found) {
+        //const users = data.users.filter(user => user.id === Number(req.params.id))
+        res.render('pages/singleuser')
+    //} else {
+    //    res.send('users not found')
+    //}
 })
 
 // POST rquest
