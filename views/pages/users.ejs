@@ -12,8 +12,16 @@
     <main>
         
         <h1 style="color:cornflowerblue;"> All users </h1>
-        <!-- Display all users-->
-   
+        <!-- Display all of my users-->
+          <% for (let i =0; i < users.length; i++) { %> 
+            <p>
+               <strong> <%=users[i].firstname%> <%=users[i].lastname%> </strong> <br>
+               <%= users[i].firstname %> <br>
+               <%= users[i].lastname %> <br>
+               <%= users[i].email %> <br>
+            <%= users[i].password %> 
+            </p>
+            <% } %>
  
     </main>
 

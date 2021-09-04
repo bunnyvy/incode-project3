@@ -51,6 +51,17 @@ app.get('/users', (req, res) => {
     // res.json(data.users)
 }) 
 
+// Display a single user
+app.get('/users/:id', (req,res) => {
+    const { id } = req.params;
+    const found = data.users.find((user, index) => index === Number(id))
+    if (found) {
+        res.render('pages/singleuser', { found, id })
+    } else {
+        res.send('users not found')
+    }
+})
+
 // Adds a new user
 app.post('/users', (req, res) => {
     const {firstname, lastname, email, password} = req.body
@@ -67,17 +78,7 @@ app.post('/users', (req, res) => {
     res.json(data.users)
 })
 
-// Display a single user
-app.get('/users/:id', (req,res) => {
-    
-    const found = data.users.some(user => user.id === Number(req.params.id))
-    if (found) {
-        const users = data.users.filter(user => user.id === Number(req.params.id))
-        res.render('pages/singleuser')
-    } else {
-        res.send('users not found')
-    }
-})
+
 
 // POST rquest
 app.listen(PORT, () => {
