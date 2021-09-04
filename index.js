@@ -62,6 +62,22 @@ app.get('/users/:id', (req,res) => {
     }
 })
 
+// Display schedule 
+
+
+
+// Display schedule for a single user
+app.get('/users/:id/schedules', (req, res) => {
+    let schedule = []
+    for (let i=0; i<data.schedules.length; i++){
+        if (data.schedules[i].user_id === Number(req.params.id)){
+            schedule.push(data.schedules[i])
+        }
+    }
+    console.log(schedule)
+    res.send(schedule)
+});
+
 // Adds a new user
 app.post('/users', (req, res) => {
     const {firstname, lastname, email, password} = req.body
