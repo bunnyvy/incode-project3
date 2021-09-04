@@ -1,3 +1,22 @@
-body {
-    background: whitesmoke;
+
+.footer-logo {
+    width: 3rem;
+}
+
+.socials img {
+    width: 2rem;
+}
+
+.foot {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.socials  {
+    text-align: center;
+}
+
+.footertopic {
+    color: #fff;
+    margin: 0;
 }

@@ -83,7 +83,7 @@ app.get('/users/:id/schedules', (req, res) => {
 });
 
 // Adds a new user
-app.post('/users', (req, res) => {
+app.post('/newusers', (req, res) => {
     const {firstname, lastname, email, password} = req.body
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync(password, salt)
@@ -93,14 +93,25 @@ app.post('/users', (req, res) => {
         email,
         password: hash
     }
-
     data.users.push(newUser)
     res.json(data.users)
 })
 
+// Adds a new schedule
+app.post('/newschedules',(req,res) => {
+    const {user_id,day,start_at,end_at} = req.body
+    const newSch = {
+        user_id,
+        day,
+        start_at,
+        end_at
+    }
+    data.schedules.push(newSch)
+    //res.json(data.schedules)
+    res.redirect('/schedules')
+})
 
-
-// POST rquest
+// PORT rquest
 app.listen(PORT, () => {
     console.log(`You're doing amazing! App is listening at http://localhost:${PORT}`)
 })
