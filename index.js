@@ -62,9 +62,13 @@ app.get('/users/:id', (req,res) => {
     }
 })
 
-// Display schedule 
-
-
+// Displays all schedule
+app.get('/schedules', (req, res) => {
+    console.log(data.schedules)
+    res.render('pages/schedules', {
+        schedules: data.schedules,
+    })
+}) 
 
 // Display schedule for a single user
 app.get('/users/:id/schedules', (req, res) => {
