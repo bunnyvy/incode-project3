@@ -9,10 +9,21 @@
 <body>
 
     <h1 style="color:cornflowerblue;"> New Schedules </h1>
-    <form action="/schedulenewschedules" method="post">
+    <form action="/schedules/newschedules" method="post">
+        <div>
+            <label for="user_id">User ID</label>
+            <select name="user_id" id="user_id"> 
+                <% for (let i =0; i < users.length; i++) { %> 
+                    <option value="<%=i%>"> <%=users[i].firstname%> 
+                        <%=users[i].lastname%>
+                    </option>
+                    <% } %>
+            </select>
+          </div>
+      
       <div>
         <label for="day">Day</label>
-        <input id="day" type="day" name="day">
+        <select name="day" id="day"> 
             <option value="">Please select the day</option>
             <option value="1">Monday</option>
             <option value="2">Tuesday</option>
@@ -21,16 +32,17 @@
             <option value="5">Friday</option>
             <option value="6">Saturday</option>
             <option value="7">Sunday</option>
+        </select>
       </div>
   
       <div>
-        <label for="start">Start at</label>
-        <input id="start" name="start" type="time" required>
+        <label for="start_at">Start at</label>
+        <input id="start_at" name="start_at" type="time" required>
       </div>
   
       <div>
-        <label for="end">End at</label>
-        <input id="end" name="end" type="time" required>
+        <label for="end_at">End at</label>
+        <input id="end_at" name="end_at" type="time" required>
       </div>
   
       <button class="submit">Submit</button>

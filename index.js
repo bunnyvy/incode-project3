@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
 const data = require('./data') // const {users, posts} = require('./data')
-require('bcryptjs')
-const PORT = process.env.PORT || 3000
+const bcrypt = require('bcrypt') 
+const PORT = process.env.PORT || 5000
 
 // Body Parser
 app.use(express.json())
@@ -17,29 +17,7 @@ app.use(express.static('public'))
 
 // Homepage
 app.get('/', (req, res) => {
-    res.render('pages/index', {
-        users: data.users //inside whatever file look at the variable users
-    })
-})
-
-// NewUsers
-app.get('/', (req, res) => {
-    res.render('pages/newusers')
-})
-
-// Users
-app.get('/', (req, res) => {
-    res.render('pages/users')
-})
-
-// Schedule
-app.get('/', (req, res) => {
-    res.render('pages/schedule')
-})
-
-// NewSchedule
-app.get('/', (req, res) => {
-    res.render('pages/newschedules')
+    res.render('pages/index')
 })
 
 // Displays all users
@@ -83,9 +61,10 @@ app.get('/users/:id/schedules', (req, res) => {
 });
 
 // Adds a new user
-app.get('/', (req, res) => {
+app.get('/newusers', (req, res) => {
     res.render('pages/newusers')
 })
+
 app.post('/newusers', (req, res) => {
     const {firstname, lastname, email, password} = req.body
     const salt = bcrypt.genSaltSync(10)
@@ -96,21 +75,27 @@ app.post('/newusers', (req, res) => {
         email,
         password: hash
     }
-    data.users.push(newUsers)
-    res.json(data.users)
+    data.users.push(newUser)
+    res.redirect('/users')
 })
 
 // Adds a new schedule
-app.post('/newschedules',(req,res) => {
-    const {day,start_at,end_at} = req.body
+app.get('/schedules/newschedules', (req, res) => {
+    const users=data.users
+    res.render('pages/newschedules', {users})
+})
+
+app.post('/schedules/newschedules',(req,res) => {
+    const {user_id, day, start_at, end_at} = req.body
     const newSch = {
+        user_id,
         day,
         start_at,
         end_at
     }
-    data.schedules.push(newschedules)
-    //res.json(data.schedules)
-    res.redirect('/schedules')
+data.schedules.push(newSch)
+//res.json(data.schedules)
+res.redirect('/schedules')
 })
 
 // PORT rquest
