@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 
 // NewSchedule
 app.get('/', (req, res) => {
-    res.render('pages/newschedule')
+    res.render('pages/newschedules')
 })
 
 // Displays all users
@@ -83,6 +83,9 @@ app.get('/users/:id/schedules', (req, res) => {
 });
 
 // Adds a new user
+app.get('/', (req, res) => {
+    res.render('pages/newusers')
+})
 app.post('/newusers', (req, res) => {
     const {firstname, lastname, email, password} = req.body
     const salt = bcrypt.genSaltSync(10)
@@ -93,20 +96,19 @@ app.post('/newusers', (req, res) => {
         email,
         password: hash
     }
-    data.users.push(newUser)
+    data.users.push(newUsers)
     res.json(data.users)
 })
 
 // Adds a new schedule
 app.post('/newschedules',(req,res) => {
-    const {user_id,day,start_at,end_at} = req.body
+    const {day,start_at,end_at} = req.body
     const newSch = {
-        user_id,
         day,
         start_at,
         end_at
     }
-    data.schedules.push(newSch)
+    data.schedules.push(newschedules)
     //res.json(data.schedules)
     res.redirect('/schedules')
 })
