@@ -8,6 +8,16 @@
 </head>
 <body>
 
+  <%- include('../partials/header') %>
+  <main> 
+  <h1 style="color:cornflowerblue;"> Single user <%=id%> </h1>
+  <p>
+      <b>First Name</b> <%= found.firstname %>   
+      <b>Last Name</b> <%= found.lastname %> 
+      <b>Email</b> <%= found.email %> 
+      <b>Password</b> <%= found.password %> 
+  </p>
+  </main>
 
 
 </body>
