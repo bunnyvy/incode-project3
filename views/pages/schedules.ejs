@@ -7,13 +7,23 @@
   <title>Document</title>
 </head>
 <body>
+  <%- include('../partials/header') %>
  <!-- Display all of my schedules-->
  <% for (let i =0; i < schedules.length; i++) { %> 
   <p>
-     <%= schedules[i].day %> <br>
-     <%= schedules[i].start_at %> <br>
-     <%= schedules[i].end_at %> <br>
+    <%= schedules[i].id %> <br>
+    <%= schedules[i].firstname %> <br>
+    <%= schedules[i].lastname %> <br>
+    <%= schedules[i].day_of_week %> <br>
+    <%= schedules[i].start_at %> <br>
+    <%= schedules[i].end_at %> <br>
   </p>
   <% } %>
 </body>
 </html>
+
+<!--checkout mdn references
+table - header row
+loop starts here
+  row 
+  columns -->

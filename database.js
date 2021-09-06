@@ -16,4 +16,4 @@ const connection = {
 const db = pgp(connection)
 
 // Exporting the database oject for shared use:
-module.exports =  db
+module.exports =  db;

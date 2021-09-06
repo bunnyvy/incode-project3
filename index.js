@@ -1,10 +1,11 @@
 const express = require('express')
 const app = express()
 const data = require('./data') // const {users, posts} = require('./data')
-require('bcryptjs')
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => console.log(`App is listening on http://localhost:${PORT}`)) // post request
+const bcrypt = require('bcrypt') 
+const PORT = process.env.PORT || 8000
 const db = require('./database')
+const homeRouter = require('./routes/home')
+const newRouter = require('./routes/new')
 
 // Body Parser Middleware
 app.use(express.json())
@@ -18,21 +19,17 @@ app.set('view engine', 'ejs')
 
 // Set public folder as our static folder
 app.use(express.static('public'));
+app.use('/', homeRouter)
+app.use('/new', newRouter)
 
-// Homepage
-app.get('/', (req, res) => {
-    res.render('pages/index', { //go to pages folder and go to index file
-        users: data.users
-    })
-})
-
-// Getting posts and new posts
-app.get('/posts', (req, res) => {
-    db.any('SELECT * FROM users;')
-    .then(posts => {
-        console.log(posts)
-        res.render('pages/posts', {
-        posts
+// a route "/new" to display a schedule form and form data
+// getting schedules and new schedules
+app.get('/schedules', (req, res) => {
+    db.any('SELECT * FROM schedules;')
+    .then(users => {
+        console.log(schedules)
+        res.render('pages/schedules', {
+        posts: schedules
         })
     })
     .catch(error => {
@@ -40,16 +37,14 @@ app.get('/posts', (req, res) => {
         res.send(error)
     })
   })
-  
-  app.get('/newposts', (req, res) => {
-    res.render('pages/newposts')
+  app.get('/newschedules', (req, res) => {
+    res.render('pages/newschedules')
   })
-
-  app.post('/newposts', (req, res) => {
+  app.post('/newschedules', (req, res) => {
       console.log(req.body)
-      db.none('INSERT INTO users(name, post) VALUES($1, $2);', [req.body.name, req.body.post])
+      db.none('INSERT INTO users(firstname, lastname, email, start_at, last_at) VALUES($1, $2, $3, $4, $5);', [req.body.firstname, req.body.lastname, red.body.email, req.body.start_at, req.body.end_at])
       .then(()=> {
-          res.redirect('/posts')
+          res.redirect('/schedules')
       })
       .catch(error => {
           console.log(error)
@@ -57,63 +52,26 @@ app.get('/posts', (req, res) => {
       })
     })
 
-// Displays all users
-app.get('/users', (req, res) => {
-    console.log(data.users)
-    res.render('pages/users', {
-        users: data.users,
-    })
-    // res.json(data.users)
-}) 
+// Adds a new schedule
+app.get('/new', (req, res) => {
+    const users=data.users
+    res.render('pages/newschedules', {users})
+})
 
-//Add new Schdule
-app.post('schedules',(req,res) => {
-    const {user_id,day,start_at,end_at} = req.body
+app.post('/new',(req,res) => {
+    const {user_id, day, start_at, end_at} = req.body
     const newSch = {
         user_id,
         day,
         start_at,
         end_at
     }
-    data.schedules.push(newSch)
-    //res.json(data.schedules)
-    res.redirect('/schedules')
+data.schedules.push(newSch)
+//res.json(data.schedules)
+res.redirect('/schedules')
 })
 
-// Adds a new user
-app.post('/users', (req, res) => {
-    const {firstname, lastname, email, password} = req.body
-    const salt = bcrypt.genSaltSync(10)
-    const hash = bcrypt.hashSync(password, salt)
-    const newUser = {
-        firstname,
-        lastname,
-        email,
-        password: hash
-    }
-
-    data.users.push(newUser)
-    //res.json(data.users)
-    res.redirect('/users')
+// PORT rquest
+app.listen(PORT, () => {
+    console.log(`You're doing amazing! App is listening at http://localhost:${PORT}`)
 })
-
-// Display a single post
-app.get('/posts/:id', (req,res) => {
-    const found = data.posts.some(post => post.id === Number(req.params.id))
-
-    if (found) {
-        const post = data.posts.filter(post => post.id === Number(req.params.id))
-        res.send(post[0])
-    } else {
-        res.send('Post not found')
-    }
-})
-
-app.get('/posts/:id', (req,res) => { // the "id" in posts/:id must be the same as req.params.id
-    res.send(req.params.id) // send request parameters in id 
-})
-
-// EJS Tags
-// <% 
-// <%= outputs the value into the template
-// <%- outputs the unescape
