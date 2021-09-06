@@ -7,8 +7,13 @@
   <title>Document</title>
 </head>
 <body>
-
-
-    
+ <!-- Display all of my schedules-->
+ <% for (let i =0; i < schedules.length; i++) { %> 
+  <p>
+     <%= schedules[i].day %> <br>
+     <%= schedules[i].start_at %> <br>
+     <%= schedules[i].end_at %> <br>
+  </p>
+  <% } %>
 </body>
 </html>
