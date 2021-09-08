@@ -9,18 +9,36 @@
 <body>
   <%- include('../partials/header') %>
  <!-- Display all of my schedules-->
- <% for (let i =0; i < schedules.length; i++) { %> 
-  <p>
-    <%= schedules[i].id %> <br>
-    <%= schedules[i].firstname %> <br>
-    <%= schedules[i].lastname %> <br>
-    <%= schedules[i].day_of_week %> <br>
-    <%= schedules[i].start_at %> <br>
-    <%= schedules[i].end_at %> <br>
-  </p>
-  <% } %>
+ 
+ <table>
+    <thead>
+      <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Day</th>
+          <th>Start at</th>
+          <th>End at</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% for (let i =0; i < schedules.length; i++) { %> 
+      <tr>
+        <td> <%= schedules[i].firstname %> </td>
+        <td> <%= schedules[i].lastname %> </td>
+        <td> <%= schedules[i].email %> </td>
+        <td> <%= schedules[i].day_of_week %> </td>
+        <td> <%= schedules[i].start_at %> </td>
+        <td> <%= schedules[i].end_at %> </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
 </body>
 </html>
+
+
 
 <!--checkout mdn references
 table - header row

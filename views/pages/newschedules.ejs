@@ -9,6 +9,7 @@
 <body>
   <%- include('../partials/header') %>
   <h1 style="color:cornflowerblue;"> New Schedules </h1>
+
   <form action="/new" method="post">
       <div>
           <label for="firstname"> First Name </label>
@@ -16,7 +17,7 @@
       </div>
     
       <div>
-          <label for="lastname"> First Name </label>
+          <label for="lastname"> Last Name </label>
           <input id="lastname" name="lastname" type="text"> 
       </div>
 
@@ -41,12 +42,12 @@
 
     <div>
       <label for="start_at">Start at</label>
-      <input id="start_at" name="start_at" type="time" required>
+      <input id="start_at" name="start_at" type="time" required min="9:00" max="17:00">
     </div>
 
     <div>
       <label for="end_at">End at</label>
-      <input id="end_at" name="end_at" type="time" required>
+      <input id="end_at" name="end_at" type="time" required min="9:00" max="17:00">
     </div>
 
     <button class="submit">Submit</button>
